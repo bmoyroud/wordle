@@ -1,13 +1,13 @@
 import React from 'react';
 
-export default function CompletedRow() {
+export default function CompletedRow({ attempt }) {
   return (
     <tr>
-      <td className="absent">e</td>
-      <td className="present">m</td>
-      <td className="correct">p</td>
-      <td>t</td>
-      <td>y</td>
+      <td className="absent">{attempt[0]}</td>
+      <td className="present">{attempt[1]}</td>
+      <td className="correct">{attempt[2]}</td>
+      <td>{attempt[3]}</td>
+      <td>{attempt[4]}</td>
     </tr>
   );
 }

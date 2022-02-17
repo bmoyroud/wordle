@@ -6,9 +6,10 @@ import CurrentRow from './CurrentRow';
 import EmptyRow from './EmptyRow';
 
 export default function Grid() {
-  const [attempts] = useState([]);
-
-  const completed = attempts.map(() => <CompletedRow />);
+  const [attempts] = useState(['chalk', 'loved']);
+  const completed = attempts.map((attempt) => (
+    <CompletedRow attempt={attempt} />
+  ));
   const empties = new Array(MAX_ATTEMPTS).fill().map(() => <EmptyRow />);
 
   return (
