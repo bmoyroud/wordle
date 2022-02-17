@@ -8,7 +8,23 @@ export default function Grid() {
 
   return (
     <table>
-      <tbody>{rows}</tbody>
+      <tbody>
+        <tr>
+          <td className="absent">e</td>
+          <td className="present">m</td>
+          <td className="correct">p</td>
+          <td>t</td>
+          <td>y</td>
+        </tr>
+        <tr>
+          <td>c</td>
+          <td>h</td>
+          <td>a</td>
+          <td></td>
+          <td></td>
+        </tr>
+        {rows}
+      </tbody>
     </table>
   );
 }
