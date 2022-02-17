@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Row() {
+export default function EmptyRow() {
   return (
     <tr>
       <td></td>

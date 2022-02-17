@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { MAX_ATTEMPTS } from '../../config';
-import Row from './Row';
+import EmptyRow from './EmptyRow';
 
 export default function Grid() {
-  const rows = new Array(MAX_ATTEMPTS).fill().map(() => <Row />);
+  const rows = new Array(MAX_ATTEMPTS).fill().map(() => <EmptyRow />);
 
   return (
     <table>
