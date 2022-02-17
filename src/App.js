@@ -18,12 +18,18 @@ export default function App() {
     setCurrentWord(word);
   };
 
+  const onDelete = () => {
+    console.log('Delete last letter');
+    const word = currentWord.slice(0, -1);
+    setCurrentWord(word);
+  };
+
   useEffect(() => {
     const listener = (e) => {
       console.log(e);
       const { key, keyCode } = e;
       if (key === 'Backspace') {
-        console.log('Delete letter');
+        onDelete();
       } else if (key === 'Enter') {
         console.log('Confirm word');
       } else if (keyCode >= 65 && keyCode <= 90) {
