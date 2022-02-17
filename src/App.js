@@ -24,6 +24,13 @@ export default function App() {
     setCurrentWord(word);
   };
 
+  const onEnter = () => {
+    const isWordComplete = currentWord.length === 5;
+    if (!isWordComplete) return;
+
+    console.log('Confirm word');
+  };
+
   useEffect(() => {
     const listener = (e) => {
       console.log(e);
@@ -31,7 +38,7 @@ export default function App() {
       if (key === 'Backspace') {
         onDelete();
       } else if (key === 'Enter') {
-        console.log('Confirm word');
+        onEnter();
       } else if (keyCode >= 65 && keyCode <= 90) {
         onChar(key);
       }
