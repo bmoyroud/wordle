@@ -29,6 +29,8 @@ export default function App() {
     if (!isWordComplete) return;
 
     console.log('Confirm word');
+    const isWordValid = validWords.includes(currentWord);
+    if (!isWordValid) return;
   };
 
   useEffect(() => {
