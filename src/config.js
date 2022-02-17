@@ -12978,6 +12978,6 @@ const WORDS = [
   'zymic',
 ];
 
-const VALID_WORDS = [...solutions, ...words];
+const VALID_WORDS = [...SOLUTIONS, ...WORDS];
 
 export { MAX_ATTEMPTS, SOLUTIONS, VALID_WORDS };
