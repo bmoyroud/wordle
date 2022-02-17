@@ -1,3 +1,14 @@
-h1, p {
+h1,
+p {
   font-family: Lato;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  flex: 1;
+  text-align: center;
 }
