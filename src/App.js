@@ -7,7 +7,16 @@ import Keyboard from './components/Keyboard';
 
 export default function App() {
   const [attempts] = useState(['chalk', 'loved']);
-  const [currentWord] = useState('empt');
+  const [currentWord, setCurrentWord] = useState('');
+
+  const onChar = (key) => {
+    const isWordComplete = currentWord.length === 5;
+    if (isWordComplete) return;
+
+    console.log('Add letter to word');
+    const word = `${currentWord}${key.toLowerCase()}`;
+    setCurrentWord(word);
+  };
 
   useEffect(() => {
     const listener = (e) => {
@@ -18,7 +27,7 @@ export default function App() {
       } else if (key === 'Enter') {
         console.log('Confirm word');
       } else if (keyCode >= 65 && keyCode <= 90) {
-        console.log('Add letter to word');
+        onChar(key);
       }
     };
     window.addEventListener('keyup', listener);
