@@ -5,15 +5,15 @@ import Header from './components/Header';
 import Grid from './components/grid/Grid';
 import Keyboard from './components/Keyboard';
 
-import { isValidWord } from './helpers/word';
+import { isCompleteWord, isValidWord } from './helpers/word';
 
 export default function App() {
   const [attempts] = useState(['chalk', 'loved']);
   const [currentWord, setCurrentWord] = useState('');
 
   const onChar = (key) => {
-    const isWordComplete = currentWord.length === 5;
-    if (isWordComplete) return;
+    const isComplete = isCompleteWord(currentWord);
+    if (isComplete) return;
 
     console.log('Add letter to word');
     const word = `${currentWord}${key.toLowerCase()}`;
@@ -27,8 +27,8 @@ export default function App() {
   };
 
   const onEnter = () => {
-    const isWordComplete = currentWord.length === 5;
-    if (!isWordComplete) return;
+    const isComplete = isCompleteWord(currentWord);
+    if (!isComplete) return;
 
     console.log('Confirm word');
     const isValid = isValidWord(currentWord);
