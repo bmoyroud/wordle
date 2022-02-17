@@ -7,6 +7,8 @@ import EmptyRow from './EmptyRow';
 
 export default function Grid() {
   const [attempts] = useState(['chalk', 'loved']);
+  const [currentWord] = useState('empt');
+
   const completed = attempts.map((attempt) => (
     <CompletedRow attempt={attempt} />
   ));
@@ -16,7 +18,7 @@ export default function Grid() {
     <table>
       <tbody>
         {completed}
-        <CurrentRow />
+        <CurrentRow currentWord={currentWord} />
         {empties}
       </tbody>
     </table>

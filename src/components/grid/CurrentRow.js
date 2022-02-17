@@ -1,13 +1,13 @@
 import React from 'react';
 
-export default function CurrentRow() {
+export default function CurrentRow({ currentWord }) {
   return (
     <tr>
-      <td>c</td>
-      <td>h</td>
-      <td>a</td>
-      <td></td>
-      <td></td>
+      <td>{currentWord[0]}</td>
+      <td>{currentWord[1]}</td>
+      <td>{currentWord[2]}</td>
+      <td>{currentWord[3]}</td>
+      <td>{currentWord[4]}</td>
     </tr>
   );
 }
