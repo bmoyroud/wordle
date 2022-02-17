@@ -2,6 +2,7 @@ import React from 'react';
 
 import { MAX_ATTEMPTS } from '../../config';
 import CompletedRow from './CompletedRow';
+import CurrentRow from './CurrentRow';
 import EmptyRow from './EmptyRow';
 
 export default function Grid() {
@@ -11,13 +12,7 @@ export default function Grid() {
     <table>
       <tbody>
         <CompletedRow />
-        <tr>
-          <td>c</td>
-          <td>h</td>
-          <td>a</td>
-          <td></td>
-          <td></td>
-        </tr>
+        <CurrentRow />
         {rows}
       </tbody>
     </table>
