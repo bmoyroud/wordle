@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { MAX_ATTEMPTS } from '../../config';
 import CompletedRow from './CompletedRow';
@@ -8,10 +8,7 @@ import EmptyRow from './EmptyRow';
 const calculateNumEmptyRows = (numAttempts, maxAttempts) =>
   numAttempts < maxAttempts ? maxAttempts - numAttempts - 1 : 0;
 
-export default function Grid() {
-  const [attempts] = useState(['chalk', 'loved']);
-  const [currentWord] = useState('empt');
-
+export default function Grid({ attempts, currentWord }) {
   const completed = attempts.map((attempt) => (
     <CompletedRow attempt={attempt} />
   ));
