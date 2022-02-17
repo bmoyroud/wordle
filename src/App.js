@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Grid from './components/grid/Grid';
 import Keyboard from './components/Keyboard';
 
+import { isValidWord } from './helpers/word';
+
 export default function App() {
   const [attempts] = useState(['chalk', 'loved']);
   const [currentWord, setCurrentWord] = useState('');
@@ -29,8 +31,8 @@ export default function App() {
     if (!isWordComplete) return;
 
     console.log('Confirm word');
-    const isWordValid = validWords.includes(currentWord);
-    if (!isWordValid) return;
+    const isValid = isValidWord(currentWord);
+    if (!isValid) return;
   };
 
   useEffect(() => {
