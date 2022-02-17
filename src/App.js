@@ -15,9 +15,9 @@ export default function App() {
         <table>
           <tbody>
             <tr>
-              <td>e</td>
-              <td>m</td>
-              <td>p</td>
+              <td className="absent">e</td>
+              <td className="present">m</td>
+              <td className="correct">p</td>
               <td>t</td>
               <td>y</td>
             </tr>
