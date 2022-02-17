@@ -10,7 +10,17 @@ export default function App() {
   const [currentWord] = useState('empt');
 
   useEffect(() => {
-    const listener = (e) => console.log(e);
+    const listener = (e) => {
+      console.log(e);
+      const { key, keyCode } = e;
+      if (key === 'Backspace') {
+        console.log('Delete letter');
+      } else if (key === 'Enter') {
+        console.log('Confirm word');
+      } else if (keyCode >= 65 && keyCode <= 90) {
+        console.log('Add letter to word');
+      }
+    };
     window.addEventListener('keyup', listener);
     return () => window.removeEventListener('keyup', listener);
   });
