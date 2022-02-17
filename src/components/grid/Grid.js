@@ -1,17 +1,14 @@
 import React from 'react';
+
+import { MAX_ATTEMPTS } from '../../config';
 import Row from './Row';
 
 export default function Grid() {
+  const rows = new Array(MAX_ATTEMPTS).fill().map(() => <Row />);
+
   return (
     <table>
-      <tbody>
-        <Row />
-        <Row />
-        <Row />
-        <Row />
-        <Row />
-        <Row />
-      </tbody>
+      <tbody>{rows}</tbody>
     </table>
   );
 }
