@@ -22,12 +22,23 @@ td {
 
 .keyboard {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 4px;
 }
 
+/* shift 2nd row */
+.keyboard > button:nth-child(11) {
+  grid-column: 2 / span 2;
+}
+
+.keyboard > button:nth-child(20),
+.keyboard > button:nth-child(28) {
+  grid-column: span 3;
+}
+
 .key {
+  grid-column: span 2;
   border: 0;
   padding: 0;
   height: 40px;
