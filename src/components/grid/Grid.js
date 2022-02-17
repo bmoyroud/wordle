@@ -5,6 +5,9 @@ import CompletedRow from './CompletedRow';
 import CurrentRow from './CurrentRow';
 import EmptyRow from './EmptyRow';
 
+const calculateNumEmptyRows = (numAttempts, maxAttempts) =>
+  numAttempts < maxAttempts ? maxAttempts - numAttempts - 1 : 0;
+
 export default function Grid() {
   const [attempts] = useState(['chalk', 'loved']);
   const [currentWord] = useState('empt');
@@ -12,7 +15,8 @@ export default function Grid() {
   const completed = attempts.map((attempt) => (
     <CompletedRow attempt={attempt} />
   ));
-  const empties = new Array(MAX_ATTEMPTS).fill().map(() => <EmptyRow />);
+  const numEmpties = calculateNumEmptyRows(attempts.length, MAX_ATTEMPTS);
+  const empties = new Array(numEmpties).fill().map(() => <EmptyRow />);
 
   return (
     <table>
