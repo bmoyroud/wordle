@@ -10,6 +10,55 @@ export default function App() {
         <button className="stats">Stats</button>
         <button className="settings">Settings</button>
       </div>
+
+      <div className="game">
+        <table>
+          <tbody>
+            <tr>
+              <td>e</td>
+              <td>m</td>
+              <td>p</td>
+              <td>t</td>
+              <td>y</td>
+            </tr>
+            <tr>
+              <td>e</td>
+              <td>m</td>
+              <td>p</td>
+              <td>t</td>
+              <td>y</td>
+            </tr>
+            <tr>
+              <td>e</td>
+              <td>m</td>
+              <td>p</td>
+              <td>t</td>
+              <td>y</td>
+            </tr>
+            <tr>
+              <td>e</td>
+              <td>m</td>
+              <td>p</td>
+              <td>t</td>
+              <td>y</td>
+            </tr>
+            <tr>
+              <td>e</td>
+              <td>m</td>
+              <td>p</td>
+              <td>t</td>
+              <td>y</td>
+            </tr>
+            <tr>
+              <td>e</td>
+              <td>m</td>
+              <td>p</td>
+              <td>t</td>
+              <td>y</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
