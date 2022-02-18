@@ -10,16 +10,16 @@ function getCorrect(word, solution) {
   if (word.length !== solution.length) throw new Error('Must be same length');
 
   const indices = [];
-  let updatedSolution = '';
+  const lettersToCheck = [];
 
   for (let i = 0; i < word.length; i++) {
     if (word[i] === solution[i]) {
       indices.push(i);
     } else {
-      updatedSolution = `${updatedSolution}${solution[i]}`;
+      lettersToCheck.push(solution[i]);
     }
   }
-  return [indices, updatedSolution];
+  return [indices, lettersToCheck];
 }
 
 const checkWord = (word, solution) => {
@@ -27,17 +27,24 @@ const checkWord = (word, solution) => {
     return ['correct', 'correct', 'correct', 'correct', 'correct'];
   }
 
-  const [correctPositions, updatedSolution] = getCorrect(word, solution);
-  console.log(correctPositions, updatedSolution);
+  const [correctPositions, lettersToCheck] = getCorrect(word, solution);
+  console.log(correctPositions, lettersToCheck);
 
   const evaluation = [];
   for (let i = 0; i < word.length; i++) {
     const letter = word[i];
 
+    console.log(lettersToCheck);
+
     if (correctPositions.includes(i)) {
       evaluation.push('correct');
-    } else if (updatedSolution.includes(letter)) {
+      continue;
+    }
+
+    const pos = lettersToCheck.indexOf(letter);
+    if (pos > -1) {
       evaluation.push('present');
+      lettersToCheck.splice(pos, 1);
     } else {
       evaluation.push('absent');
     }
