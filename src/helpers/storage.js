@@ -21,6 +21,7 @@ function saveStats(stats) {
 }
 
 function loadStats() {
+  console.log('Loading stats');
   const json = localStorage.getItem(KEY_STATISTICS);
   const stats = JSON.parse(json);
   if (!stats) return INITIAL_STATS;

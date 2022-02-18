@@ -27,8 +27,7 @@ export default function App() {
   const [allStatuses, setStatuses] = useState(game.allStatuses || {});
   const [isGameOver, setIsGameOver] = useState(game.isGameOver || false);
 
-  const stats = loadStats();
-  const [statistics, setStatistics] = useState(stats);
+  const [statistics, setStatistics] = useState(loadStats);
 
   const onChar = (key) => {
     const isComplete = isCompleteWord(currentWord);
@@ -83,6 +82,18 @@ export default function App() {
       isGameOver,
     });
   }, [attempts, isGameOver]);
+
+  useEffect(() => {
+    console.log('isGameOver', isGameOver);
+    if (isGameOver) {
+      // resetGame
+      setAttempts([]);
+      setEvaluations([]);
+      setCurrentWord('');
+      setStatuses({});
+      setIsGameOver(false);
+    }
+  }, [isGameOver]);
 
   useEffect(() => {
     const listener = (e) => {
