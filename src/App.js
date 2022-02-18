@@ -6,23 +6,23 @@ import Grid from './components/grid/Grid';
 import Keyboard from './components/keyboard/Keyboard';
 
 import { checkWord, isCompleteWord, isValidWord } from './helpers/word';
+import { checkStatuses } from './helpers/status';
 
 export default function App() {
   const [attempts, setAttempts] = useState([]);
   const [evaluations, setEvaluations] = useState([]);
   const [currentWord, setCurrentWord] = useState('');
+  const [allStatuses, setStatuses] = useState({});
 
   const onChar = (key) => {
     const isComplete = isCompleteWord(currentWord);
     if (isComplete) return;
 
-    console.log('Add letter to word');
     const word = `${currentWord}${key.toLowerCase()}`;
     setCurrentWord(word);
   };
 
   const onDelete = () => {
-    console.log('Delete last letter');
     const word = currentWord.slice(0, -1);
     setCurrentWord(word);
   };
@@ -31,21 +31,20 @@ export default function App() {
     const isComplete = isCompleteWord(currentWord);
     if (!isComplete) return;
 
-    console.log('Confirm word');
     const isValid = isValidWord(currentWord);
     if (!isValid) return;
 
     const solution = 'empty';
-    const evaluation = checkWord(currentWord, solution);
+    const [evaluation, statuses] = checkWord(currentWord, solution);
 
     setEvaluations([...evaluations, evaluation]);
+    setStatuses(checkStatuses(allStatuses, statuses));
     setAttempts([...attempts, currentWord]);
     setCurrentWord('');
   };
 
   useEffect(() => {
     const listener = (e) => {
-      console.log(e);
       const { key, keyCode } = e;
       if (key === 'Backspace') {
         onDelete();
@@ -69,7 +68,12 @@ export default function App() {
           evaluations={evaluations}
           currentWord={currentWord}
         />
-        <Keyboard onChar={onChar} onDelete={onDelete} onEnter={onEnter} />
+        <Keyboard
+          statuses={allStatuses}
+          onChar={onChar}
+          onDelete={onDelete}
+          onEnter={onEnter}
+        />
       </div>
     </div>
   );

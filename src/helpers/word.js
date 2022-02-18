@@ -1,4 +1,5 @@
 import { VALID_WORDS } from '../config';
+import { getHighestStatus } from './status';
 
 const isCompleteWord = (word) => word.length === 5;
 
@@ -22,35 +23,38 @@ function getCorrect(word, solution) {
   return [indices, lettersToCheck];
 }
 
-const checkWord = (word, solution) => {
-  if (isSolution(word, solution)) {
-    return ['correct', 'correct', 'correct', 'correct', 'correct'];
+function getStatus(correctPositions, currentPos, letter, lettersToCheck) {
+  if (correctPositions.includes(currentPos)) {
+    return 'correct';
   }
 
+  const pos = lettersToCheck.indexOf(letter);
+  if (pos > -1) {
+    lettersToCheck.splice(pos, 1);
+    return 'present';
+  }
+
+  return 'absent';
+}
+
+const checkWord = (word, solution) => {
   const [correctPositions, lettersToCheck] = getCorrect(word, solution);
   console.log(correctPositions, lettersToCheck);
 
   const evaluation = [];
+  const statuses = {};
   for (let i = 0; i < word.length; i++) {
     const letter = word[i];
 
-    console.log(lettersToCheck);
+    const status = getStatus(correctPositions, i, letter, lettersToCheck);
+    evaluation.push(status);
 
-    if (correctPositions.includes(i)) {
-      evaluation.push('correct');
-      continue;
-    }
-
-    const pos = lettersToCheck.indexOf(letter);
-    if (pos > -1) {
-      evaluation.push('present');
-      lettersToCheck.splice(pos, 1);
-    } else {
-      evaluation.push('absent');
-    }
+    statuses[letter] = getHighestStatus(statuses[letter], status);
   }
 
-  return evaluation;
+  return [evaluation, statuses];
 };
 
-export { checkWord, isCompleteWord, isValidWord };
+window.checkWord = checkWord;
+
+export { checkWord, isCompleteWord, isValidWord, isSolution };

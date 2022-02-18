@@ -1,8 +1,9 @@
 import React from 'react';
 
-export default function Key({ value, onClick }) {
+export default function Key({ status, value, onClick }) {
+  const className = status !== undefined ? `key ${status}` : 'key';
   return (
-    <button className="key" onClick={onClick}>
+    <button className={className} onClick={onClick}>
       {value}
     </button>
   );

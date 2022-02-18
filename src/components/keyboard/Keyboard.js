@@ -1,7 +1,7 @@
 import React from 'react';
 import Key from './Key';
 
-export default function Keyboard({ onChar, onDelete, onEnter }) {
+export default function Keyboard({ statuses, onChar, onDelete, onEnter }) {
   const onClick = (key) => {
     if (key === 'Del') {
       onDelete();
@@ -44,7 +44,7 @@ export default function Keyboard({ onChar, onDelete, onEnter }) {
   ];
 
   const keys = values.map((val) => (
-    <Key value={val} onClick={() => onClick(val)} />
+    <Key status={statuses[val]} value={val} onClick={() => onClick(val)} />
   ));
 
   return <div className="keyboard">{keys}</div>;
