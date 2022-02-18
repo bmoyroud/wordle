@@ -69,7 +69,7 @@ export default function App() {
           evaluations={evaluations}
           currentWord={currentWord}
         />
-        <Keyboard />
+        <Keyboard onChar={onChar} onDelete={onDelete} onEnter={onEnter} />
       </div>
     </div>
   );
