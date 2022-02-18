@@ -12,10 +12,10 @@ import {
   isSolution,
 } from './helpers/word';
 import { checkStatuses } from './helpers/status';
-import { saveGameState, retrieveGameState } from './helpers/storage';
+import { saveGame, loadGame } from './helpers/storage';
 
 export default function App() {
-  const game = retrieveGameState();
+  const game = loadGame();
   console.log(game);
 
   const [attempts, setAttempts] = useState(game.attempts || []);
@@ -56,7 +56,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    saveGameState({
+    saveGame({
       attempts,
       evaluations,
       currentWord: '',
