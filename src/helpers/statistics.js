@@ -15,6 +15,9 @@ const INITIAL_STATS = {
 
 const increment = (num) => num + 1;
 
+const calculateWinPercentage = (wins, played) =>
+  played > 0 ? Math.ceil((wins / played) * 100) : 0;
+
 // only if current streak is larger than max streak, do we update max streak
 const calculateMaxStreak = (currentStreak, maxStreak) =>
   currentStreak > maxStreak ? currentStreak : maxStreak;
@@ -57,4 +60,4 @@ function calculateStatistics(prevStats, isGameWon, numAttempts) {
   };
 }
 
-export { INITIAL_STATS, calculateStatistics };
+export { INITIAL_STATS, calculateWinPercentage, calculateStatistics };

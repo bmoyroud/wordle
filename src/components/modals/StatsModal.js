@@ -1,4 +1,5 @@
 import React from 'react';
+import { calculateWinPercentage } from '../../helpers/statistics';
 
 export default function StatsModal({ statistics }) {
   const { played, wins, currentStreak, maxStreak } = statistics;
@@ -13,7 +14,7 @@ export default function StatsModal({ statistics }) {
             <span>Played</span>
           </div>
           <div className="modal-statistic">
-            <span>100</span>
+            <span>{calculateWinPercentage(wins, played)}</span>
             <span>Win %</span>
           </div>
           <div className="modal-statistic">
