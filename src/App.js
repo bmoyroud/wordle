@@ -12,13 +12,17 @@ import {
   isSolution,
 } from './helpers/word';
 import { checkStatuses } from './helpers/status';
+import { saveGameState, retrieveGameState } from './helpers/storage';
 
 export default function App() {
-  const [attempts, setAttempts] = useState([]);
-  const [evaluations, setEvaluations] = useState([]);
-  const [currentWord, setCurrentWord] = useState('');
-  const [allStatuses, setStatuses] = useState({});
-  const [isGameOver, setIsGameOver] = useState(false);
+  const game = retrieveGameState();
+  console.log(game);
+
+  const [attempts, setAttempts] = useState(game.attempts || []);
+  const [evaluations, setEvaluations] = useState(game.evaluations || []);
+  const [currentWord, setCurrentWord] = useState(game.currentWord || '');
+  const [allStatuses, setStatuses] = useState(game.allStatuses || {});
+  const [isGameOver, setIsGameOver] = useState(game.isGameOver || false);
 
   const onChar = (key) => {
     const isComplete = isCompleteWord(currentWord);
@@ -44,12 +48,22 @@ export default function App() {
     const isGameOver = isSolution(currentWord, solution);
     const [evaluation, statuses] = checkWord(currentWord, solution);
 
+    setIsGameOver(isGameOver);
     setEvaluations([...evaluations, evaluation]);
     setStatuses(checkStatuses(allStatuses, statuses));
     setAttempts([...attempts, currentWord]);
     setCurrentWord('');
-    setIsGameOver(isGameOver);
   };
+
+  useEffect(() => {
+    saveGameState({
+      attempts,
+      evaluations,
+      currentWord: '',
+      allStatuses,
+      isGameOver,
+    });
+  }, [attempts]);
 
   useEffect(() => {
     const listener = (e) => {
