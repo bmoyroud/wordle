@@ -30,6 +30,11 @@ export default function App() {
 
   const [statistics, setStatistics] = useState(loadStats);
 
+  // modals
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   const onChar = (key) => {
     const isComplete = isCompleteWord(currentWord);
     if (isComplete) return;
@@ -114,11 +119,11 @@ export default function App() {
 
   return (
     <div>
-      <StatsModal statistics={statistics} />
+      {isModalOpen && (
+        <StatsModal closeModal={closeModal} statistics={statistics} />
+      )}
 
-      <Header />
-
-      {JSON.stringify(statistics)}
+      <Header openModal={openModal} />
 
       <div className="game">
         <Grid

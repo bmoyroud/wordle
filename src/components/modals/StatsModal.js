@@ -1,12 +1,14 @@
 import React from 'react';
 import { calculateWinPercentage } from '../../helpers/statistics';
 
-export default function StatsModal({ statistics }) {
+export default function StatsModal({ closeModal, statistics }) {
   const { played, wins, currentStreak, maxStreak } = statistics;
   return (
-    <div className="modal">
+    <div className="modal" onClick={closeModal}>
       <div className="modal-content">
-        <button className="modal-close">x</button>
+        <button className="modal-close" onClick={closeModal}>
+          x
+        </button>
         <div className="modal-title">Statistics</div>
         <div className="modal-statistics">
           <div className="modal-statistic">
