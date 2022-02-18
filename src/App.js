@@ -118,7 +118,7 @@ export default function App() {
   });
 
   return (
-    <div>
+    <>
       {isModalOpen && (
         <StatsModal closeModal={closeModal} statistics={statistics} />
       )}
@@ -140,6 +140,6 @@ export default function App() {
           onEnter={onEnter}
         />
       </div>
-    </div>
+    </>
   );
 }
