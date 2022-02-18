@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 
+import { MAX_ATTEMPTS } from './config';
+
 import Header from './components/Header';
 import Grid from './components/grid/Grid';
 import Keyboard from './components/keyboard/Keyboard';
@@ -12,17 +14,21 @@ import {
   isSolution,
 } from './helpers/word';
 import { checkStatuses } from './helpers/status';
-import { saveGame, loadGame } from './helpers/storage';
+import { calculateStatistics } from './helpers/statistics';
+import { saveGame, loadGame, saveStats, loadStats } from './helpers/storage';
 
 export default function App() {
   const game = loadGame();
-  console.log(game);
-
+  // TODO: move loading elsewhere?
+  // console.log(game);
   const [attempts, setAttempts] = useState(game.attempts || []);
   const [evaluations, setEvaluations] = useState(game.evaluations || []);
   const [currentWord, setCurrentWord] = useState(game.currentWord || '');
   const [allStatuses, setStatuses] = useState(game.allStatuses || {});
   const [isGameOver, setIsGameOver] = useState(game.isGameOver || false);
+
+  const stats = loadStats();
+  const [statistics, setStatistics] = useState(stats);
 
   const onChar = (key) => {
     const isComplete = isCompleteWord(currentWord);
@@ -45,15 +51,26 @@ export default function App() {
     if (!isValid) return;
 
     const solution = 'empty';
-    const isLastAttempt = (attempts) => attempts.length + 1 === MAX_ATTEMPTS;
-    const isGameOver =
-      isSolution(currentWord, solution) || isLastAttempt(attempts);
-    const [evaluation, statuses] = checkWord(currentWord, solution);
 
-    setIsGameOver(isGameOver);
+    const [evaluation, statuses] = checkWord(currentWord, solution);
+    // note: order matters
     setEvaluations([...evaluations, evaluation]);
     setStatuses(checkStatuses(allStatuses, statuses));
-    setAttempts([...attempts, currentWord]);
+
+    const updatedAttempts = [...attempts, currentWord];
+    const numAttempts = updatedAttempts.length;
+    const isLost = numAttempts === MAX_ATTEMPTS;
+    const isWon = isSolution(currentWord, solution);
+    const isGameOver = isWon || isLost;
+    setAttempts(updatedAttempts);
+    setIsGameOver(isGameOver);
+
+    if (isGameOver) {
+      const stats = calculateStatistics(statistics, isWon, numAttempts);
+      setStatistics(stats);
+      saveStats(stats);
+    }
+
     setCurrentWord('');
   };
 
@@ -65,7 +82,7 @@ export default function App() {
       allStatuses,
       isGameOver,
     });
-  }, [attempts]);
+  }, [attempts, isGameOver]);
 
   useEffect(() => {
     const listener = (e) => {
@@ -86,6 +103,8 @@ export default function App() {
   return (
     <div>
       <Header />
+
+      {JSON.stringify(statistics)}
 
       <div className="game">
         <Grid
