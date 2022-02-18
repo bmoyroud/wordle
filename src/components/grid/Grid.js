@@ -8,7 +8,12 @@ import EmptyRow from './EmptyRow';
 const calculateNumEmptyRows = (numAttempts, maxAttempts) =>
   numAttempts < maxAttempts ? maxAttempts - numAttempts - 1 : 0;
 
-export default function Grid({ attempts, evaluations, currentWord }) {
+export default function Grid({
+  isGameOver,
+  attempts,
+  evaluations,
+  currentWord,
+}) {
   const completed = attempts.map((attempt, i) => (
     <CompletedRow attempt={attempt} evaluation={evaluations[i]} />
   ));
@@ -19,7 +24,7 @@ export default function Grid({ attempts, evaluations, currentWord }) {
     <table>
       <tbody>
         {completed}
-        <CurrentRow currentWord={currentWord} />
+        {!isGameOver && <CurrentRow currentWord={currentWord} />}
         {empties}
       </tbody>
     </table>

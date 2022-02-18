@@ -45,7 +45,9 @@ export default function App() {
     if (!isValid) return;
 
     const solution = 'empty';
-    const isGameOver = isSolution(currentWord, solution);
+    const isLastAttempt = (attempts) => attempts.length + 1 === MAX_ATTEMPTS;
+    const isGameOver =
+      isSolution(currentWord, solution) || isLastAttempt(attempts);
     const [evaluation, statuses] = checkWord(currentWord, solution);
 
     setIsGameOver(isGameOver);
@@ -87,6 +89,7 @@ export default function App() {
 
       <div className="game">
         <Grid
+          isGameOver={isGameOver}
           attempts={attempts}
           evaluations={evaluations}
           currentWord={currentWord}
