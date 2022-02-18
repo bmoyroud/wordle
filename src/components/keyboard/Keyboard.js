@@ -1,8 +1,15 @@
 import React from 'react';
 import Key from './Key';
 
-export default function Keyboard({ statuses, onChar, onDelete, onEnter }) {
+export default function Keyboard({
+  statuses,
+  isGameOver,
+  onChar,
+  onDelete,
+  onEnter,
+}) {
   const onClick = (key) => {
+    if (isGameOver) return;
     if (key === 'Del') {
       onDelete();
     } else if (key === 'Enter') {

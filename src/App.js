@@ -5,7 +5,12 @@ import Header from './components/Header';
 import Grid from './components/grid/Grid';
 import Keyboard from './components/keyboard/Keyboard';
 
-import { checkWord, isCompleteWord, isValidWord } from './helpers/word';
+import {
+  checkWord,
+  isCompleteWord,
+  isValidWord,
+  isSolution,
+} from './helpers/word';
 import { checkStatuses } from './helpers/status';
 
 export default function App() {
@@ -13,6 +18,7 @@ export default function App() {
   const [evaluations, setEvaluations] = useState([]);
   const [currentWord, setCurrentWord] = useState('');
   const [allStatuses, setStatuses] = useState({});
+  const [isGameOver, setIsGameOver] = useState(false);
 
   const onChar = (key) => {
     const isComplete = isCompleteWord(currentWord);
@@ -35,16 +41,19 @@ export default function App() {
     if (!isValid) return;
 
     const solution = 'empty';
+    const isGameOver = isSolution(currentWord, solution);
     const [evaluation, statuses] = checkWord(currentWord, solution);
 
     setEvaluations([...evaluations, evaluation]);
     setStatuses(checkStatuses(allStatuses, statuses));
     setAttempts([...attempts, currentWord]);
     setCurrentWord('');
+    setIsGameOver(isGameOver);
   };
 
   useEffect(() => {
     const listener = (e) => {
+      if (isGameOver) return;
       const { key, keyCode } = e;
       if (key === 'Backspace') {
         onDelete();
@@ -70,6 +79,7 @@ export default function App() {
         />
         <Keyboard
           statuses={allStatuses}
+          isGameOver={isGameOver}
           onChar={onChar}
           onDelete={onDelete}
           onEnter={onEnter}
