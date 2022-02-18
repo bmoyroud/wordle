@@ -5,10 +5,10 @@ import Header from './components/Header';
 import Grid from './components/grid/Grid';
 import Keyboard from './components/Keyboard';
 
-import { isCompleteWord, isValidWord } from './helpers/word';
+import { checkWord, isCompleteWord, isValidWord } from './helpers/word';
 
 export default function App() {
-  const [attempts] = useState(['chalk', 'loved']);
+  const [attempts, setAttempts] = useState(['chalk', 'empty']);
   const [currentWord, setCurrentWord] = useState('');
 
   const onChar = (key) => {
@@ -33,6 +33,9 @@ export default function App() {
     console.log('Confirm word');
     const isValid = isValidWord(currentWord);
     if (!isValid) return;
+
+    const solution = 'empty';
+    const evaluation = checkWord(currentWord, solution);
   };
 
   useEffect(() => {
