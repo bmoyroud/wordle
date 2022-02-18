@@ -8,7 +8,8 @@ import Keyboard from './components/Keyboard';
 import { checkWord, isCompleteWord, isValidWord } from './helpers/word';
 
 export default function App() {
-  const [attempts, setAttempts] = useState(['chalk', 'empty']);
+  const [attempts, setAttempts] = useState([]);
+  const [evaluations, setEvaluations] = useState([]);
   const [currentWord, setCurrentWord] = useState('');
 
   const onChar = (key) => {
@@ -37,6 +38,7 @@ export default function App() {
     const solution = 'empty';
     const evaluation = checkWord(currentWord, solution);
 
+    setEvaluations([...evaluations, evaluation]);
     setAttempts([...attempts, currentWord]);
     setCurrentWord('');
   };
@@ -62,7 +64,11 @@ export default function App() {
       <Header />
 
       <div className="game">
-        <Grid attempts={attempts} currentWord={currentWord} />
+        <Grid
+          attempts={attempts}
+          evaluations={evaluations}
+          currentWord={currentWord}
+        />
         <Keyboard />
       </div>
     </div>

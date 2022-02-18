@@ -8,9 +8,9 @@ import EmptyRow from './EmptyRow';
 const calculateNumEmptyRows = (numAttempts, maxAttempts) =>
   numAttempts < maxAttempts ? maxAttempts - numAttempts - 1 : 0;
 
-export default function Grid({ attempts, currentWord }) {
-  const completed = attempts.map((attempt) => (
-    <CompletedRow attempt={attempt} />
+export default function Grid({ attempts, evaluations, currentWord }) {
+  const completed = attempts.map((attempt, i) => (
+    <CompletedRow attempt={attempt} evaluation={evaluations[i]} />
   ));
   const numEmpties = calculateNumEmptyRows(attempts.length, MAX_ATTEMPTS);
   const empties = new Array(numEmpties).fill().map(() => <EmptyRow />);
