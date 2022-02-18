@@ -3,7 +3,7 @@ import './style.css';
 
 import Header from './components/Header';
 import Grid from './components/grid/Grid';
-import Keyboard from './components/Keyboard';
+import Keyboard from './components/keyboard/Keyboard';
 
 import { checkWord, isCompleteWord, isValidWord } from './helpers/word';
 
