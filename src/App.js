@@ -36,6 +36,9 @@ export default function App() {
 
     const solution = 'empty';
     const evaluation = checkWord(currentWord, solution);
+
+    setAttempts([...attempts, currentWord]);
+    setCurrentWord('');
   };
 
   useEffect(() => {
