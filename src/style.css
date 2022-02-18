@@ -1,6 +1,5 @@
-h1,
-p {
-  font-family: Lato;
+html {
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .header {
@@ -65,4 +64,64 @@ td {
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.modal-close {
+  align-self: flex-end;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  padding: 16px;
+
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px 0 rgb(0 0 0 / 20%);
+}
+
+.modal-title {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.modal-statistics {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.modal-statistic {
+  flex: 1 1 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-statistic > span:nth-child(1) {
+  font-size: 36px;
+}
+
+.modal-statistic > span:nth-child(2) {
+  font-size: 12px;
+  text-align: center;
 }

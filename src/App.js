@@ -3,6 +3,7 @@ import './style.css';
 
 import { MAX_ATTEMPTS } from './config';
 
+import StatsModal from './components/modals/StatsModal';
 import Header from './components/Header';
 import Grid from './components/grid/Grid';
 import Keyboard from './components/keyboard/Keyboard';
@@ -113,6 +114,8 @@ export default function App() {
 
   return (
     <div>
+      <StatsModal statistics={statistics} />
+
       <Header />
 
       {JSON.stringify(statistics)}
