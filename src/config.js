@@ -1,5 +1,7 @@
 const MAX_ATTEMPTS = 6;
 
+const MAX_WORD_LENGTH = 5;
+
 const SOLUTIONS = [
   'cigar',
   'rebut',
@@ -12980,4 +12982,4 @@ const WORDS = [
 
 const VALID_WORDS = [...SOLUTIONS, ...WORDS];
 
-export { MAX_ATTEMPTS, SOLUTIONS, VALID_WORDS };
+export { MAX_ATTEMPTS, MAX_WORD_LENGTH, SOLUTIONS, VALID_WORDS };

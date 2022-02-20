@@ -1,13 +1,9 @@
 import React from 'react';
+import { MAX_WORD_LENGTH } from '../../config';
 
 export default function CurrentRow({ currentWord }) {
-  return (
-    <tr>
-      <td>{currentWord[0]}</td>
-      <td>{currentWord[1]}</td>
-      <td>{currentWord[2]}</td>
-      <td>{currentWord[3]}</td>
-      <td>{currentWord[4]}</td>
-    </tr>
-  );
+  const cells = new Array(MAX_WORD_LENGTH)
+    .fill()
+    .map((i) => <td>{currentWord[i]}</td>);
+  return <tr>{cells}</tr>;
 }
