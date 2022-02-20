@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { MAX_ATTEMPTS } from '../../config';
-import CompletedRow from './CompletedRow';
-import CurrentRow from './CurrentRow';
-import EmptyRow from './EmptyRow';
+import CompletedRow from './rows/CompletedRow';
+import CurrentRow from './rows/CurrentRow';
+import EmptyRow from './rows/EmptyRow';
 
 const calculateNumEmptyRows = (numAttempts, maxAttempts) =>
   numAttempts < maxAttempts ? maxAttempts - numAttempts - 1 : 0;
